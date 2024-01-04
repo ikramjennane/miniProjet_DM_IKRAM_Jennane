@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Prédiction de désabonnement</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Prédiction de désabonnement</h1>
+        <p>Veuillez saisir les valeurs des 10 premières variables.</p>
+        <form method="post" action="{{ url_for('predict') }}">
+            {% for i in range(1, 11) %}
+                <label for="variable_{{ i }}">Variable {{ i }} :</label>
+                <input type="number" step="0.01" name="variable_{{ i }}" required>
+            {% endfor %}
+            <button type="submit">Prédire</button>
+        </form>
+        {% if prediction is defined %}
+            <p>Prédiction de désabonnement : {{ prediction }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
